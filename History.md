@@ -1,4 +1,14 @@
 
+3.0.0 / 2017-09-20
+==================
+
+  * Add support for running inside Electron without the need to spawn a new Electron process
+  * Attach to an existing BrowserWindow and <webview> that have required preload content
+  * Secure the preload.js script so page contents cannot send insecure content via IPC e.g. ELECTRON calls
+  * **breaking change:** Optionally remove window.__nightmare completely from preload.js and use IPC for executing javascript instead of executeJavaScript
+  * Upgrades to Electron 1.7.7
+  
+  
 2.10.0 / 2017-02-23
 ===================
 
