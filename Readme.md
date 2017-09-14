@@ -147,6 +147,16 @@ const nightmare = Nightmare({
 });
 ```
 
+##### blurInput (default: true)
+Specify whether to do a blur after .text()/.insert() 
+
+```js
+const nightmare = Nightmare({
+  blurInput: false 
+});
+```
+
+
 ##### paths
 The default system paths that Electron knows about. Here's a list of available paths: https://github.com/atom/electron/blob/master/docs/api/app.md#appgetpathname
 
@@ -252,6 +262,22 @@ nightmare
 #### .halt(error, done)
 Clears all queued operations, kills the electron process, and passes error message or 'Nightmare Halted' to an unresolved promise. Done will be called after the process has exited.
 
+#### .setOptions(name,value)/.setOptions(object)
+Change nightmare instance options during execution
+
+```js
+nightmare
+  .goto(someUrl)
+  .setOptions({blurInput: false}) // disable default of options.blurInput = true
+  .type('selector','text')
+  .setOptions('loadTimeout',10000)
+  .click('[name=btn]')
+```
+
+
+**WIP**
+
+
 ### Interact with the Page
 
 #### .goto(url[, headers])
@@ -300,17 +326,18 @@ Mouseovers the `selector` element once.
 #### .mouseout(selector)
 Mouseout the `selector` element once.
 
-#### .type(selector[, text])
+#### .type(selector[, text, blur = options.blurInput])
 Enters the `text` provided into the `selector` element.  Empty or falsey values provided for `text` will clear the selector's value.
-
+Optionally trigger a blur after
 `.type()` mimics a user typing in a textbox and will emit the proper keyboard events.
 
 Key presses can also be fired using Unicode values with `.type()`. For example, if you wanted to fire an enter key press, you would  write `.type('body', '\u000d')`.
 
 > If you don't need the keyboard events, consider using `.insert()` instead as it will be faster and more robust.
 
-#### .insert(selector[, text])
+#### .insert(selector[, text, blur = options.blurInput])
 Similar to `.type()`, `.insert()` enters the `text` provided into the `selector` element.  Empty or falsey values provided for `text` will clear the selector's value.
+Optionally trigger a blur after
 
 `.insert()` is faster than `.type()` but does not trigger the keyboard events.
 
