@@ -148,7 +148,7 @@ const nightmare = Nightmare({
 ```
 
 ##### blurInput (default: true)
-Specify whether to do a blur after .text()/.insert() 
+Specify whether to do a blur after .type()/.insert() 
 
 ```js
 const nightmare = Nightmare({
